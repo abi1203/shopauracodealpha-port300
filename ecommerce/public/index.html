@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopAura — Premium Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="logo">Shop<span>Aura</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/orders.html" id="ordersLink" style="display:none">My Orders</a>
+      <span id="userGreet" class="user-greet"></span>
+      <button id="authBtn" class="btn-outline" onclick="openAuth()">Login</button>
+      <a href="/cart.html" class="cart-icon">
+        🛒 <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-tag">New Collection 2024</p>
+    <h1>Discover Products <br><span>Worth Loving</span></h1>
+    <p class="hero-sub">Curated essentials for modern living. Quality you can feel.</p>
+    <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})" class="btn-primary">Shop Now ↓</button>
+  </div>
+  <div class="hero-shapes">
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+    <div class="shape s3"></div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<section class="filter-bar" id="products">
+  <div class="filter-inner">
+    <div class="categories">
+      <button class="cat-btn active" onclick="filterCat('All', this)">All</button>
+      <button class="cat-btn" onclick="filterCat('Electronics', this)">Electronics</button>
+      <button class="cat-btn" onclick="filterCat('Fashion', this)">Fashion</button>
+      <button class="cat-btn" onclick="filterCat('Home', this)">Home</button>
+      <button class="cat-btn" onclick="filterCat('Sports', this)">Sports</button>
+    </div>
+    <div class="filter-right">
+      <input type="text" id="searchInput" placeholder="Search products..." oninput="searchProducts()" />
+      <select id="sortSelect" onchange="loadProducts()">
+        <option value="">Sort: Latest</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+      </select>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS GRID -->
+<section class="products-section">
+  <div class="products-grid" id="productsGrid">
+    <div class="loading-spinner">Loading...</div>
+  </div>
+</section>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAuth()">✕</button>
+    <div class="auth-tabs">
+      <button class="tab active" id="loginTab" onclick="switchTab('login')">Login</button>
+      <button class="tab" id="registerTab" onclick="switchTab('register')">Register</button>
+    </div>
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="login(event)">
+      <h2>Welcome Back</h2>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••" required />
+      </div>
+      <div class="form-msg" id="loginMsg"></div>
+      <button type="submit" class="btn-primary w-full">Login</button>
+    </form>
+    <!-- Register Form -->
+    <form id="registerForm" style="display:none" onsubmit="register(event)">
+      <h2>Create Account</h2>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="regName" placeholder="John Doe" required />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="regPass" placeholder="Min 6 characters" required />
+      </div>
+      <div class="form-msg" id="regMsg"></div>
+      <button type="submit" class="btn-primary w-full">Create Account</button>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<footer class="footer">
+  <p>© 2024 ShopAura · CodeAlpha Internship Project</p>
+</footer>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
